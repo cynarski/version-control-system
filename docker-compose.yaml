@@ -4,7 +4,7 @@ services:
   vcs:
     build: .
     volumes:
-      - .:/app            # ← montujesz bieżący katalog do /app
+      - .:/app
     working_dir: /app
     tty: true
     stdin_open: true

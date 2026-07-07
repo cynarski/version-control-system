@@ -1,11 +1,16 @@
 FROM python:3.12-slim
 
-# Ustawiamy katalog roboczy w kontenerze
-WORKDIR /app
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
 
-# Kopiujemy pliki z lokalnego systemu do kontenera
-COPY . /app
+WORKDIR /opt/vcs
 
-# Instalujemy wymagane zależności z pliku requirements.txt
-RUN pip install .
+COPY pyproject.toml README.md ./
+COPY src ./src
 
+RUN python -m pip install .
+
+WORKDIR /workspace
+
+CMD ["/bin/bash"]
